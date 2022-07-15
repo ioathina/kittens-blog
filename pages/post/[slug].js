@@ -5,7 +5,14 @@ import styles from "../../styles/Post.module.css";
 import BlockContent from "@sanity/block-content-to-react";
 import { Toolbar } from "../../components/toolbar";
 
-export const Post = ({ title, body, image, ogImage, ogTitle, ogBody }) => {
+export const Post = ({
+  title,
+  body,
+  image,
+  ogImage,
+  ogTitle,
+  ogDescription,
+}) => {
   const [imageUrl, setImageUrl] = useState("∫∫");
 
   useEffect(() => {
@@ -21,7 +28,7 @@ export const Post = ({ title, body, image, ogImage, ogTitle, ogBody }) => {
     <>
       <Head>
         <meta property="og:title" content={ogTitle} />
-        <meta property="og:description" content={ogBody} />
+        <meta property="og:description" content={ogDescription} />
         <meta property="og:image" content={ogImage} />
         <meta property="og:url" content="https://visitor.is" />
       </Head>
@@ -70,12 +77,18 @@ export const getServerSideProps = async (pageContext) => {
       .image(post.mainImage)
       .toString();
 
+    const ogTitle = post.title;
+
+    const ogDescription = post.description;
+
     return {
       props: {
         body: post.body,
         title: post.title,
         image: post.mainImage,
         ogImage,
+        ogTitle,
+        ogDescription,
       },
     };
   }
