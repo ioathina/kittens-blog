@@ -75,9 +75,7 @@ export const getServerSideProps = async (pageContext) => {
         body: post.body,
         title: post.title,
         image: post.mainImage,
-        ogTitle,
         ogImage,
-        ogBody,
       },
     };
   }
